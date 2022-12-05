@@ -1,1 +1,1 @@
-# social-procect-backend
+# social-project-backend
