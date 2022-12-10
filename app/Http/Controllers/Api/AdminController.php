@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
-
+use Exception;
 
 class AdminController extends Controller
 {
