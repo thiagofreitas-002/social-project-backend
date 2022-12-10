@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('cardapios', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date');
+            $table->date('date');
             $table->string('breakfest');
             $table->string('lunch');
             $table->string('afternoon_snack');
