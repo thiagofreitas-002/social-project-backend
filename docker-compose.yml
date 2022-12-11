@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  db:
+    image: docker.io/bitnami/mariadb:10.6
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=admin
+      - MARIADB_DATABASE=socialproject
+    volumes:
+      - dbvolume:/var/lib/mysql
+  socialproject-backend:
+    image: arturbruno17/socialproject-backend:v1
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=admin
+      - DB_DATABASE=socialproject
+    depends_on:
+      - db
+volumes:
+  dbvolume:
