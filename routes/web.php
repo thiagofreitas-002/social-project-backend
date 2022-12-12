@@ -29,6 +29,18 @@ Route::get('/suporte', function () {
     return view('/support');
 });
 
+Route::get('/criar/noticia', function () {
+    return view('/create_edit_news');
+});
+
+Route::get('/criar/cardapio', function () {
+    return view('/create_edit_menu');
+});
+
+Route::get('/criar/suporte', function () {
+    return view('/create_edit_support');
+});
+
 Route::delete('news/{id}', [NoticiasController::class, 'destroy']);
 Route::post('news', [NoticiasController::class, 'store']);
 Route::get('news/{id}', [NoticiasController::class, 'show']);
