@@ -39,7 +39,7 @@
         <h2>Seja bem-vindo a parte administrativa do sistema da EEEP AFS</h2>
 
         <h3 class="mt-5">Notícias</h3>
-        <button class="btn">Adicionar notícia</button>
+        <button class="btn mb-2">Adicionar notícia</button>
         <div class="table-responsive table-container" id="noticias-table">
             <table class="table">
                 <thead>
@@ -155,7 +155,7 @@
             </table>
         </div>
         <h3 class="mt-5">Cardápios</h3>
-        <button class="btn">Adicionar cardápio</button>
+        <button class="btn mb-2">Adicionar cardápio</button>
         <div class="table-responsive table-container" id="cardapios-table">
             <table class="table">
                 <thead>
