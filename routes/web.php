@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::delete('news/{id}', [NoticiasController::class, 'destroy']);
+Route::post('news', [NoticiasController::class, 'store']);
+Route::get('news/{id}', [NoticiasController::class, 'show']);
+
