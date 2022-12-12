@@ -1,0 +1,40 @@
+span {
+    color: #005D1A;
+}
+
+table h3 {
+    font-size: 2rem;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: 407px;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        background-color: transparent;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    img {
+        display: none;
+    }
+}
+
+.table-container {
+    overflow-y: scroll;
+    max-height: 246px;
+}
+
+.description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 50ch;
+}
+
+h2 {
+    font-size: 1.5rem;
+}

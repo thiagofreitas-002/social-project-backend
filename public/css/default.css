@@ -1,0 +1,14 @@
+h1 {
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 90.4%;
+
+    letter-spacing: -0.01rem;
+
+    color: #ff9900;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    color: #010101;
+}

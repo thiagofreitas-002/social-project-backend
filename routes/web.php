@@ -20,6 +20,15 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return redirect('/login');
 });
+
+Route::get('/admin', function () {
+    return view('/admin');
+});
+
+Route::get('/suporte', function () {
+    return view('/support');
+});
+
 Route::delete('news/{id}', [NoticiasController::class, 'destroy']);
 Route::post('news', [NoticiasController::class, 'store']);
 Route::get('news/{id}', [NoticiasController::class, 'show']);

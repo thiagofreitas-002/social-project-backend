@@ -12,6 +12,7 @@ html {
     }
 }
 
+
 @media (max-width: 1024px) {
     body form {
         padding: 2rem;
