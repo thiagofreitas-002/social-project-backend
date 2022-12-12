@@ -1,0 +1,57 @@
+body,
+html {
+    height: 100vh;
+    background-image: url("../img/img_bg.png");
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body,
+    html {
+        background-image: none;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    body form {
+        padding: 2rem;
+        background-color: #fff;
+    }
+
+    body label {
+        font-size: 1rem;
+    }
+}
+
+label {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+h1 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 90.4%;
+
+    letter-spacing: -0.01rem;
+
+    color: #ff9900;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    color: #010101;
+}
+
+form {
+    border: 1px solid #ced4da;
+    border-radius: 1rem;
+    padding: 4rem;
+}
+
+.content {
+    width: 60%;
+}

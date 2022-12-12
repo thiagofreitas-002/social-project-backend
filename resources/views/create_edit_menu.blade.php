@@ -25,26 +25,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ URL::asset('css/default.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}">
-    
+    <link rel="stylesheet" href="{{ URL::asset('css/create_edit_menu.css') }}">
+
 </head>
 
 <body class="d-flex justify-content-center flex-column align-items-center">
     <div class="container d-flex justify-content-center flex-column align-items-center">
 
         <div class="content">
-            <h1>Login - Sistema EEEP AFS</h1>
+            <h1>Criar cardápio</h1>
             <form class="mt-5">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="nome@example.com">
+                    <label for="date" class="form-label">Data do cardápio</label>
+                    <input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy">
                 </div>
                 <div class="mb-3">
-                    <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="********">
+                    <label for="breakfest" class="form-label">Café da manhã</label>
+                    <input type="text" class="form-control" id="breakfest" placeholder="Pão com café">
                 </div>
-
-                <button type="submit" class="btn">Logar</button>
+                <div class="mb-3">
+                    <label for="lunch" class="form-label">Almoço</label>
+                    <input type="text" class="form-control" id="lunch" placeholder="Carne de gado">
+                </div>
+                <div class="mb-3">
+                    <label for="afternoon_snack" class="form-label">Merenda da tarde</label>
+                    <input type="text" class="form-control" id="afternoon_snack" placeholder="Pão com café">
+                </div>
+                <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar cardápio"
+                ou "salvar cardápio" -->
+                <button type="submit" class="btn">Criar cardápio</button>
             </form>
         </div>
 
