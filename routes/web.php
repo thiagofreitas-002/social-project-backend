@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login', function () {
+    return view('login');
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 Route::delete('news/{id}', [NoticiasController::class, 'destroy']);
 Route::post('news', [NoticiasController::class, 'store']);
