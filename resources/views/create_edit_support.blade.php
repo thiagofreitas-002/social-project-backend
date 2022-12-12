@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Criar cardápio - EEEP AFS</title>
+    <title>Criar suporte - EEEP AFS</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ URL::asset('css/default.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/create_edit_menu.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/create_edit_support.css') }}">
 
 </head>
 
@@ -33,27 +33,27 @@
     <div class="container d-flex justify-content-center flex-column align-items-center">
 
         <div class="content">
-            <h1>Criar cardápio</h1>
+            <h1>Criar suporte</h1>
             <form class="mt-5">
                 <div class="mb-3">
-                    <label for="date" class="form-label">Data do cardápio</label>
-                    <input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Francisco">
                 </div>
                 <div class="mb-3">
-                    <label for="breakfest" class="form-label">Café da manhã</label>
-                    <input type="text" class="form-control" id="breakfest" placeholder="Pão com café">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="nome@example.com">
                 </div>
                 <div class="mb-3">
-                    <label for="lunch" class="form-label">Almoço</label>
-                    <input type="text" class="form-control" id="lunch" placeholder="Carne de gado">
+                    <label for="telephone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="telephone" placeholder="(xx) xxxxx-xxxx">
                 </div>
                 <div class="mb-3">
-                    <label for="afternoon_snack" class="form-label">Merenda da tarde</label>
-                    <input type="text" class="form-control" id="afternoon_snack" placeholder="Pão com café">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" placeholder="********">
                 </div>
-                <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar cardápio"
-                ou "salvar cardápio" -->
-                <button type="submit" class="btn">Criar cardápio</button>
+                <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar suporte"
+                ou "salvar suporte" -->
+                <button type="submit" class="btn">Criar suporte</button>
             </form>
         </div>
 
