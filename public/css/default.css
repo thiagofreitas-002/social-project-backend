@@ -12,3 +12,13 @@ h1 {
     font-family: "Montserrat", sans-serif;
     color: #010101;
 }
+
+button.btn {
+    background-color: #ff9900;
+    transition: 500ms;
+}
+
+button.btn:hover {
+    border: 1px solid #ff9900;
+    background-color: transparent;
+}
