@@ -32,6 +32,13 @@
       tinymce.init({
         selector: '#description'
       });
+
+      function putDescriptionOnHiddenInput() {
+        let inputHidden = document.querySelector("input[name='description']")
+        inputHidden.value = tinymce.activeEditor.getContent();
+        console.log( document.querySelector("input[name='description']").value)
+      }
+
     </script>
 
 </head>
@@ -47,8 +54,9 @@
                     <input type="text" class="form-control" id="title" placeholder="Título">
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Descrição</label>
-                    <textarea id="description"></textarea>    
+                    <label class="form-label">Descrição</label>
+                    <textarea id="description"></textarea>
+                    <input type="hidden" name="description">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Imagem</label>
@@ -56,7 +64,7 @@
                 </div>
                 <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar notícia"
                 ou "salvar notícia" -->
-                <button type="submit" class="btn">Criar notícia</button>
+                <button type="button" class="btn" onclick="putDescriptionOnHiddenInput()">Criar notícia</button>
             </form>
         </div>
 
