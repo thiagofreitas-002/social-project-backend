@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers\Api\Suporte;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Noticia;
+use App\Models\Cardapio;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\NoticiasRequest;
+
+class SuporteNoticiaController extends Controller
+{
+
+    private $columnsToReturn = ['id', 'title', 'description', 'image'];
+
+    public function getAll()
+    {
+        $noticias = DB::table('noticias')->get($this->columnsToReturn);
+        return response()->json($noticias);
+    }
+
+    public function getById($id)
+    {
+        $noticia = DB::table('noticias')->where('id', $id)->first($this->columnsToReturn);
+        return response()->json($noticia);
+    }
+    public function show($id){
+        if (!$data = Noticia::find($id)) {
+            return "error";
+        }
+        return $data;
+    }
+    public function store(NoticiasRequest $request)
+    {
+        
+        $data = $request->all();
+        Noticia::create($data);
+        
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+
+        return view('/support/support')->with([
+            'user' => $request->session()->get('user'), 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+    }
+
+    public function edit($id){
+        $noticia = Noticia::findOrFail($id);
+        return view('support/action/edit_news', compact('noticia'));
+    }
+
+    public function update(NoticiasRequest $request){
+        $data = $request->all();
+        Noticia::findOrFail($request->id)->update($data);
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+
+        return view('/support/support')->with([
+            'user' => $request->session()->get('user'), 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+        
+     }
+    public function destroy($id, Request $request)
+    {
+        if (!$data = Noticia::find($id)) {
+            return "error";
+        }
+        $data->delete();
+     
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+                
+        return view('/support/support')->with([
+            'user' => $request->session()->get('user'),
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+
+    }
+}

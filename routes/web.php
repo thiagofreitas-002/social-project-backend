@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\NoticiasController;
 use App\Http\Controllers\Api\SuporteController;
 use App\Http\Controllers\Api\ValidationController;
 
+use App\Http\Controllers\Api\Suporte\SuporteCardapioController;
+use App\Http\Controllers\Api\Suporte\SuporteNoticiaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,7 +57,24 @@ Route::get('/admin/edit/suporte/{id}', [SuporteController::class, 'edit']);
 Route::put('/admin/update/suporte/{id}', [SuporteController::class, 'update']);
 Route::delete('/admin/suporte/delete/{id}', [SuporteController::class, 'destroy']);
 
+// ÁREA DE SUPORTE
 
+Route::get('/suporte/criar/noticia', function () {
+    return view('/support/action/create_news');
+});
+Route::get('/suporte/criar/cardapio', function () {
+    return view('/support/action/create_menu');
+});
+
+Route::post('/suporte/criar/cardapio', [SuporteCardapioController::class, 'store']);
+Route::get('/suporte/edit/cardapio/{id}', [SuporteCardapioController::class, 'edit']);
+Route::put('/suporte/update/cardapio/{id}', [SuporteCardapioController::class, 'update']);
+Route::delete('/suporte/cardapio/delete/{id}', [SuporteCardapioController::class, 'destroy']);
+
+Route::post('/suporte/criar/noticia', [SuporteNoticiaController::class, 'store']);
+Route::get('/suporte/edit/noticia/{id}', [SuporteNoticiaController::class, 'edit']);
+Route::put('/suporte/update/noticia/{id}', [SuporteNoticiaController::class, 'update']);
+Route::delete('/suporte/noticia/delete/{id}', [SuporteNoticiaController::class, 'destroy']);
 
 
 

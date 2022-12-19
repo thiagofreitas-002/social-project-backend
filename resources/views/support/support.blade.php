@@ -25,7 +25,7 @@
         <h2>Seja bem-vindo a parte administrativa do sistema da EEEP AFS</h2>
 
         <h3 class="mt-5">Notícias</h3>
-        <button class="btn mb-2">Adicionar notícia</button>
+        <button class="btn mb-2"><a href="/suporte/criar/noticia">Adicionar Notícias</a></button>
         <div class="table-responsive table-container" id="noticias-table">
             <table class="table">
                 <thead>
@@ -44,8 +44,31 @@
                         <td scope="row">{{ $noticia->id }}</td>
                         <td><p class="description">{{ $noticia->title }}</p></td>
                         <td><p class="description">{{ $noticia->description }}</p></td>
-                        <td><i class="fa-regular fa-pen-to-square"></i></td>
-                        <td><i class="fa-regular fa-trash-can"></i></td>
+
+                        <td>
+                            <form action="/suporte/edit/noticia/{{ $noticia->id }}" method="GET">
+                                @csrf
+                                <a href="/suporte/edit/noticia/{{ $noticia->id }}" 
+                                   onclick="event.preventDefault();
+                                   this.closest('form').submit();
+                                 ">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                 </a>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/suporte/noticia/delete/{{$noticia->id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <a href="/suporte/noticia/delete/{{$noticia->id}}"  
+                                    onclick="event.preventDefault();
+                                    this.closest('form').submit();
+                                    ">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
                     </tr>
                     @endforeach
                     @else
@@ -62,7 +85,7 @@
             </table>
         </div>
         <h3 class="mt-5">Cardápios</h3>
-        <button class="btn mb-2">Adicionar cardápio</button>
+        <button class="btn mb-2"><a href="/suporte/criar/cardapio">Adicionar Cardápio</a></button>
         <div class="table-responsive table-container" id="cardapios-table">
             <table class="table">
                 <thead>
@@ -82,11 +105,33 @@
                     <tr>
                         <td scope="row">{{ $cardapio->id }}</td>
                         <td>{{ $cardapio->date }}</td>
-                        <td>{{ $cardapio->breakfast}}</td>
+                        <td>{{ $cardapio->breakfest}}</td>
                         <td>{{ $cardapio->lunch }}</td>
                         <td>{{ $cardapio->afternoon_snack }}</td>
-                        <td><i class="fa-regular fa-pen-to-square"></i></td>
-                        <td><i class="fa-regular fa-trash-can"></i></td>
+
+                        <td>
+                            <form action="/suporte/edit/cardapio/{{ $cardapio->id }}" method="GET">
+                                @csrf
+                                <a href="/suporte/edit/cardapio/{{ $cardapio->id }}" 
+                                   onclick="event.preventDefault();
+                                   this.closest('form').submit();
+                                 ">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                 </a>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/suporte/cardapio/delete/{{$cardapio->id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <a href="/suporte/cardapio/delete/{{$cardapio->id}}"  
+                                    onclick="event.preventDefault();
+                                    this.closest('form').submit();
+                                    ">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                     @else
