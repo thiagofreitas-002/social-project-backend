@@ -18,7 +18,7 @@ class AdminController extends Controller
         $this->admin = $admin;
     }
 
-    public function index(Request $request, $user){
+    public function index($user){
         // $suportes = Suporte::all();
         // $noticias = Noticia::all();
         // $cardapio = Cardapio::all();

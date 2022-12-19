@@ -20,10 +20,10 @@ class ValidationController extends Controller
                     ->first();
 
             if(!$user){
-                return redirect('/')->with('msg', 'Usuário não encontrado');
+                return view('/')->with('msg', 'Usuário não encontrado');
             }
 
-            return redirect('/admin')->with('user', $user);
+            return view('/admin')->with('user', $user);
         }
 
         if(Suporte::where('email', $request->email)->exists()){
@@ -33,13 +33,13 @@ class ValidationController extends Controller
                     ->first();
 
             if(!$user){
-                return redirect('/')->with('msg', 'Usuário não encontrado');
+                return view('/')->with('msg', 'Usuário não encontrado');
             }
 
-            return redirect('/suporte')->with('user', $user);
+            return view('/support')->with('user', $user);
         }
 
-        return redirect()->back()->with('msg', 'Usuário não encontrado');
+        return view()->back()->with('msg', 'Usuário não encontrado');
 
     }
 }

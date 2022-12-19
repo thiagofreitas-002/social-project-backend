@@ -21,7 +21,7 @@
     <img src="{{ URL::asset('img/img_bg.png') }}" style="position: fixed" />
     <div class="container">
         <!-- Aqui, será o nome da pessoa que se logará no sistema -->
-        <h1 class="mt-5"><span>Olá,</span> Artur</h1>
+        <h1 class="mt-5"><span>Olá,</span> {{ $user->name }}</h1>
         <h2>Seja bem-vindo a parte administrativa do sistema da EEEP AFS</h2>
 
         <h3 class="mt-5">Notícias</h3>
