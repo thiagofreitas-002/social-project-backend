@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Noticia;
+use App\Models\Cardapio;
+use App\Models\Suporte;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Requests\NoticiasRequest;
 
 class NoticiasController extends Controller
@@ -32,15 +34,59 @@ class NoticiasController extends Controller
     }
     public function store(NoticiasRequest $request)
     {
+        
         $data = $request->all();
         Noticia::create($data);
+        
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'), 
+            'suportes' => $suportes, 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
     }
-    public function destroy($id)
+
+    public function edit($id){
+        $noticia = Noticia::findOrFail($id);
+        return view('admin/action/edit_news', compact('noticia'));
+    }
+
+    public function update(NoticiasRequest $request){
+        $data = $request->all();
+        Noticia::findOrFail($request->id)->update($data);
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'), 
+            'suportes' => $suportes, 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+        
+     }
+    public function destroy($id, Request $request)
     {
         if (!$data = Noticia::find($id)) {
             return "error";
         }
         $data->delete();
+     
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+                
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'),
+            'suportes' => $suportes, 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
 
     }
 }

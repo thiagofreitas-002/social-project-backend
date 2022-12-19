@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SuporteRequest;
 use App\Models\Suporte;
+use App\Models\Noticia;
+use App\Models\Cardapio;
 use Exception;
 
 class SuporteController extends Controller
@@ -15,24 +17,53 @@ class SuporteController extends Controller
         $this->suporte = $suporte;
     }
 
-    public function index(Request $request){
-        return view('support', ['user' => $request->user]);
-    }
-
     public function store(SuporteRequest $request){
-        // $datas = $request->all();
-        // $insert = Admin::create($datas);
-        // return response()->json($insert);
         
         try{
+            $suportes = Suporte::all();
+            $noticias = Noticia::all();
+            $cardapio = Cardapio::all();
             $this->suporte['name'] = $request->name;
             $this->suporte['email'] = $request->email;
-            $this->suporte['password'] = bcrypt($request->password);
+            $this->suporte['password'] = $request->password;
             $this->suporte['telephone'] = $request->telephone;
             $insert = Suporte::create($this->suporte);
-            return response()->json($insert);
-        } catch(Exception $e){
+
+            return view('/admin/admin')->with([
+                'user' => $request->session()->get('user'), 
+                'suportes' => $suportes, 
+                'noticias' => $noticias,
+                'cardapio' => $cardapio
+            ]);
+        }
+        catch(Exception $e){
             abort($e);
         }
+    }
+
+    public function edit($id){
+        $suporte = Suporte::findOrFail($id);
+        return view('admin/action/edit_support', compact('suporte'));
+    }
+
+    public function update(Request $request){
+        Suporte::findOrFail($request->id)->update($request->all());
+        return redirect()->back();
+    }
+    public function destroy($id, Request $request){
+        $suporte = Suporte::findOrFail($id);
+        $suporte->delete();
+        
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+                
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'),
+            'suportes' => $suportes, 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+
     }
 }

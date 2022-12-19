@@ -8,5 +8,3 @@ Route::GET('news', [NoticiasController::class, 'getAll']);
 Route::GET('menus', [CardapioController::class, 'getAll']);
 Route::GET('menus/today', [CardapioController::class, 'getTodayMenu']);
 Route::GET('news/{id}', [NoticiasController::class, 'getById']);
-//Route::GET('news/store', [NoticiasController::class, 'store']);
-

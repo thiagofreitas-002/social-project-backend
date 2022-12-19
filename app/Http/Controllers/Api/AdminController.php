@@ -18,14 +18,6 @@ class AdminController extends Controller
         $this->admin = $admin;
     }
 
-    public function index($user){
-        // $suportes = Suporte::all();
-        // $noticias = Noticia::all();
-        // $cardapio = Cardapio::all();
-        // return view('admin', ['user' => $request->user]);
-        dd($user); // not working
-    }
-
     public function store(AdminRequest $request){
         // $datas = $request->all();
         // $insert = Admin::create($datas);
@@ -34,7 +26,7 @@ class AdminController extends Controller
         try{
             $this->admin['name'] = $request->name;
             $this->admin['email'] = $request->email;
-            $this->admin['password'] = bcrypt($request->password);
+            $this->admin['password'] = $request->password;
             $this->admin['telephone'] = $request->telephone;
             Admin::create($this->admin);
         }catch(Exception $e){

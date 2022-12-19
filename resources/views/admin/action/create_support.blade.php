@@ -19,25 +19,38 @@
 
         <div class="content">
             <h1>Criar suporte</h1>
-            <form class="mt-5">
+            <form class="mt-5" action="/criar/suporte" method="POST">
+                @method('POST')
+                @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" placeholder="Francisco">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Francisco">
+                    @error('name')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="nome@example.com">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="nome@example.com">
+                    @error('email')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror 
                 </div>
                 <div class="mb-3">
                     <label for="telephone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="telephone" placeholder="(xx) xxxxx-xxxx">
+                    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx">
+                    @error('telephone')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" placeholder="********">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="********">
+                    @error('password')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-                <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar suporte"
-                ou "salvar suporte" -->
+
                 <button type="submit" class="btn">Criar suporte</button>
             </form>
         </div>

@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Criar notícia - EEEP AFS')
+@section('title', 'Editar notícia - EEEP AFS')
 
 @push('localcss')
     <link rel="stylesheet" href="{{ URL::asset('css/create_edit_news.css') }}">
@@ -14,8 +14,7 @@
 
       function putDescriptionOnHiddenInput() {
         let inputHidden = document.querySelector("input[name='description']")
-        inputHidden.value = tinymce.activeEditor.getContent();
-        console.log( document.querySelector("input[name='description']").value)
+        inputHidden.value = tinymce.activeEditor.getContent({format: 'text'});
       }
 
     </script>
@@ -34,24 +33,34 @@
     <div class="container d-flex justify-content-center flex-column align-items-center">
 
         <div class="content">
-            <h1>Criar notícia</h1>
-            <form class="mt-5">
+            <h1>Editar notícia</h1>
+            <form class="mt-5" action="/admin/update/noticia/{{ $noticia->id }}" method="POST"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="title" class="form-label">Título</label>
-                    <input type="text" class="form-control" id="title" placeholder="Título">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Título" value="{{$noticia->title}}">
+                    @error('title')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Descrição</label>
-                    <textarea id="description"></textarea>
-                    <input type="hidden" name="description">
+                    <textarea id="description">{{ $noticia->description }}</textarea>
+                    <input type="hidden"  name="description">
+                    @error('description')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Imagem</label>
-                    <input type="file" class="form-control" id="image" placeholder="Imagens" multiple>
+                    <input type="file" class="form-control" id="image" name="image" placeholder="Imagens" value="{{$noticia->image}}">
+                    @error('description')
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-                <!-- Aqui, o nome do botão dependerá se a ação é de criar ou editar botão. Ou seja, "criar notícia"
-                ou "salvar notícia" -->
-                <button type="button" class="btn" onclick="putDescriptionOnHiddenInput()">Criar notícia</button>
+
+                <button type="submit" class="btn" onclick="putDescriptionOnHiddenInput()">Salvar notícia</button>
             </form>
         </div>
 
