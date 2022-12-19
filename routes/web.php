@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\CardapioController;
+use App\Http\Controllers\Api\NoticiasController;
+use App\Http\Controllers\Api\SuporteController;
 use App\Http\Controllers\Api\ValidationController;
 
 /*
@@ -18,20 +22,16 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::post('/login', [ValidationController::class, 'validation'])->middleware('auth.user');
+Route::post('/login', [ValidationController::class, 'validation']);
 
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/admin', function () {
-    return view('/admin');
-});
+Route::get('/admin', [AdminController::class, 'index']);
 
-Route::get('/suporte', function () {
-    return view('/support');
-});
+Route::get('/suporte', [SuporteController::class, 'index']);
 
 Route::get('/criar/noticia', function () {
     return view('/create_edit_news');

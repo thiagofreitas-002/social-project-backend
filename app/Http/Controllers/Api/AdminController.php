@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
+use App\Models\Suporte;
+use App\Models\Noticia;
+use App\Models\Cardapio;
 use Exception;
 
 class AdminController extends Controller
@@ -13,6 +16,14 @@ class AdminController extends Controller
     protected $admin;
     public function __contruct(Admin $admin){
         $this->admin = $admin;
+    }
+
+    public function index(Request $request, $user){
+        // $suportes = Suporte::all();
+        // $noticias = Noticia::all();
+        // $cardapio = Cardapio::all();
+        // return view('admin', ['user' => $request->user]);
+        dd($user); // not working
     }
 
     public function store(AdminRequest $request){

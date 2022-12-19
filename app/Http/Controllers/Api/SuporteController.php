@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SuporteRequest;
 use App\Models\Suporte;
@@ -12,6 +13,10 @@ class SuporteController extends Controller
     protected $suporte;
     public function __contruct(Suporte $suporte){
         $this->suporte = $suporte;
+    }
+
+    public function index(Request $request){
+        return view('support', ['user' => $request->user]);
     }
 
     public function store(SuporteRequest $request){
