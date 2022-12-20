@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <img src="{{ URL::asset('img/img_bg.') }}" style="position: fixed" />
+    <img src="{{ URL::asset('img/img_bg.png') }}" style="position: fixed" />
     <div class="container">
         <!-- Aqui, será o nome da pessoa que se logará no sistema -->
         <h1 class="mt-5"><span>Olá,</span> {{ $user->name }}</h1>

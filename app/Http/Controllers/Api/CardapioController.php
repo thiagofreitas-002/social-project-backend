@@ -15,12 +15,14 @@ class CardapioController extends Controller
 
     private $columnsToReturn = ['id', 'date', 'breakfest', 'lunch', 'afternoon_snack'];
 
-    public function getAll() {
+    public function getAll()
+    {
         $menus = DB::table('cardapios')->get($this->columnsToReturn);
         return response()->json($menus);
     }
 
-    public function getTodayMenu() {
+    public function getTodayMenu()
+    {
         try {
             $todayDate = date('Y/m/d');
             $todayMenu = DB::table('cardapios')->where('date', $todayDate)->first($this->columnsToReturn);
@@ -32,10 +34,12 @@ class CardapioController extends Controller
             abort($e);
         }
     }
-    public function create(){
+    public function create()
+    {
 
     }
-    public function store(cardapioRequest $request){
+    public function store(cardapioRequest $request)
+    {
         $data = $request->all();
         $cardapio = new Cardapio;
         $cardapio->date = $request->date;
@@ -47,36 +51,48 @@ class CardapioController extends Controller
         $suportes = Suporte::all();
         $noticias = Noticia::all();
         $cardapio = Cardapio::all();
-                
+
         return view('/admin/admin')->with([
             'user' => $request->session()->get('user'),
-            'suportes' => $suportes, 
+            'suportes' => $suportes,
             'noticias' => $noticias,
             'cardapio' => $cardapio
         ]);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $cardapio = Cardapio::findOrFail($id);
         return view('admin/action/edit_menu', compact('cardapio'));
     }
 
-    public function update(Request $request){
-       Cardapio::findOrFail($request->id)->update($request->all());
-       return redirect()->back();
-    }
-
-    public function destroy($id, Request $request){
-        $cardapio = Cardapio::findOrFail($id);
-        $cardapio->delete();
-        
+    public function update(Request $request)
+    {
+        Cardapio::findOrFail($request->id)->update($request->all());
         $suportes = Suporte::all();
         $noticias = Noticia::all();
         $cardapio = Cardapio::all();
-                
+
         return view('/admin/admin')->with([
             'user' => $request->session()->get('user'),
-            'suportes' => $suportes, 
+            'suportes' => $suportes,
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
+    }
+
+    public function destroy($id, Request $request)
+    {
+        $cardapio = Cardapio::findOrFail($id);
+        $cardapio->delete();
+
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'),
+            'suportes' => $suportes,
             'noticias' => $noticias,
             'cardapio' => $cardapio
         ]);

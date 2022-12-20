@@ -20,14 +20,15 @@ class SuporteController extends Controller
     public function store(SuporteRequest $request){
         
         try{
-            $suportes = Suporte::all();
-            $noticias = Noticia::all();
-            $cardapio = Cardapio::all();
             $this->suporte['name'] = $request->name;
             $this->suporte['email'] = $request->email;
             $this->suporte['password'] = $request->password;
             $this->suporte['telephone'] = $request->telephone;
             $insert = Suporte::create($this->suporte);
+
+            $suportes = Suporte::all();
+            $noticias = Noticia::all();
+            $cardapio = Cardapio::all();
 
             return view('/admin/admin')->with([
                 'user' => $request->session()->get('user'), 
@@ -48,7 +49,16 @@ class SuporteController extends Controller
 
     public function update(Request $request){
         Suporte::findOrFail($request->id)->update($request->all());
-        return redirect()->back();
+        $suportes = Suporte::all();
+        $noticias = Noticia::all();
+        $cardapio = Cardapio::all();
+                
+        return view('/admin/admin')->with([
+            'user' => $request->session()->get('user'),
+            'suportes' => $suportes, 
+            'noticias' => $noticias,
+            'cardapio' => $cardapio
+        ]);
     }
     public function destroy($id, Request $request){
         $suporte = Suporte::findOrFail($id);
