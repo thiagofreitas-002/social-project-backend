@@ -13,18 +13,15 @@ use App\Http\Requests\NoticiasRequest;
 
 class NoticiasController extends Controller
 {
-
-    private $columnsToReturn = ['id', 'title', 'description', 'image'];
-
     public function getAll()
     {
-        $noticias = DB::table('noticias')->get($this->columnsToReturn);
+        $noticias = DB::table('noticias')->orderByDesc("created_at")->get();
         return response()->json($noticias);
     }
 
     public function getById($id)
     {
-        $noticia = DB::table('noticias')->where('id', $id)->first($this->columnsToReturn);
+        $noticia = DB::table('noticias')->where('id', $id)->first();
         return response()->json($noticia);
     }
     public function show($id){

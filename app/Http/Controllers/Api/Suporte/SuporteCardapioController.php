@@ -13,17 +13,15 @@ use Illuminate\Support\Facades\DB;
 class SuporteCardapioController extends Controller
 {
 
-    private $columnsToReturn = ['id', 'date', 'breakfest', 'lunch', 'afternoon_snack'];
-
     public function getAll() {
-        $menus = DB::table('cardapios')->get($this->columnsToReturn);
+        $menus = DB::table('cardapios')->get();
         return response()->json($menus);
     }
 
     public function getTodayMenu() {
         try {
             $todayDate = date('Y/m/d');
-            $todayMenu = DB::table('cardapios')->where('date', $todayDate)->first($this->columnsToReturn);
+            $todayMenu = DB::table('cardapios')->where('date', $todayDate)->first();
             if ($todayMenu == null) {
                 return response()->json(["message" => "Cardápio de hoje não cadastrado"], 502);
             }
