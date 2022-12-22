@@ -9,16 +9,43 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-use App\Http\Requests\NoticiasRequest;
 
 class NoticiasController extends Controller
 {
-    public function getAll()
+    public function getAll(Request $request)
     {
+        $page = null;
+        $noticesPerPage = null;
+        if (is_string($request->query("page")) && is_string($request->query("limit"))) {
+            $page = intval($request->query("page"));
+            $noticesPerPage = intval($request->query("limit"));
+        }
+
         $noticias = DB::table('noticias')->orderByDesc("created_at")->get();
+
+        if (($page-1)*$noticesPerPage > $noticias->count()) {
+            return response()->json(
+                ["message" => "Índice requisitado maior que a quantidade de notícias"],
+                400
+            );
+        }
+
         foreach ($noticias as $noticia) {
             $noticia->image = config("app.url").":8000/storage/noticias/".$noticia->image;
         }
+
+        if (!is_null($page) && !is_null($noticesPerPage)) {
+            $noticiasLimitadas = array_slice($noticias->toArray(), $noticesPerPage*($page-1), $noticesPerPage);
+            return response()->json(
+                [
+                    "length" => $noticias->count(),
+                    "total_pages" => ceil(($noticias->count()/$noticesPerPage)),
+                    "actual_page" => $page,
+                    "data" => $noticiasLimitadas
+                ]
+            );
+        }
+
         return response()->json($noticias);
     }
 
