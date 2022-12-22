@@ -20,5 +20,8 @@ services:
       - DB_DATABASE=socialproject
     depends_on:
       - db
+    volumes:
+      - storagevolume:/app/storage/app/public
 volumes:
   dbvolume:
+  storagevolume:
