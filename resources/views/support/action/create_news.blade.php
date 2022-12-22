@@ -34,7 +34,7 @@
 
         <div class="content">
             <h1>Criar notícia</h1>
-            <form class="mt-5" action="/suporte/criar/noticia" method="POST">
+            <form class="mt-5" action="/suporte/criar/noticia" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="mb-3">

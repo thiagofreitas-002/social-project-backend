@@ -8,6 +8,7 @@ use App\Models\Suporte;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests\NoticiasRequest;
 
 class NoticiasController extends Controller
@@ -34,13 +35,21 @@ class NoticiasController extends Controller
     }
     public function store(NoticiasRequest $request)
     {
-        
         $data = $request->all();
-        Noticia::create($data);
         
-        $suportes = Suporte::all();
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $extension = $request->image->extension();
+            $name = uniqid(date('his'));
+            $nameFile = "{$name}.{$extension}";
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"), 70);
+
+            $data['image'] = $nameFile;
+        }
+    
+        Noticia::create($data);
         $noticias = Noticia::all();
         $cardapio = Cardapio::all();
+        $suportes = Suporte::all();
 
         return view('/admin/admin')->with([
             'user' => $request->session()->get('user'), 

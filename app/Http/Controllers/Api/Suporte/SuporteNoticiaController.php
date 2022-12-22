@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Noticia;
 use App\Models\Cardapio;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests\NoticiasRequest;
 
 class SuporteNoticiaController extends Controller
@@ -35,8 +36,17 @@ class SuporteNoticiaController extends Controller
     {
         
         $data = $request->all();
-        Noticia::create($data);
         
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $extension = $request->image->extension();
+            $name = uniqid(date('his'));
+            $nameFile = "{$name}.{$extension}";
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"), 70);
+
+            $data['image'] = $nameFile;
+        }
+        
+        Noticia::create($data);
         $noticias = Noticia::all();
         $cardapio = Cardapio::all();
 
