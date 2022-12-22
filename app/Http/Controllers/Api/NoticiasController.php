@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\NoticiasRequest;
 use App\Models\Noticia;
 use App\Models\Cardapio;
 use App\Models\Suporte;
