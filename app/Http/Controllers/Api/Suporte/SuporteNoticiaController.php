@@ -39,7 +39,7 @@ class SuporteNoticiaController extends Controller
             $extension = $request->image->extension();
             $name = uniqid(date('his'));
             $nameFile = "{$name}.{$extension}";
-            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"), 70);
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"));
 
             $data['image'] = $nameFile;
         }
@@ -62,6 +62,16 @@ class SuporteNoticiaController extends Controller
 
     public function update(NoticiasRequest $request){
         $data = $request->all();
+        
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $extension = $request->image->extension();
+            $name = uniqid(date('his'));
+            $nameFile = "{$name}.{$extension}";
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"));
+
+            $data['image'] = $nameFile;
+        }
+
         Noticia::findOrFail($request->id)->update($data);
         $noticias = Noticia::all();
         $cardapio = Cardapio::all();

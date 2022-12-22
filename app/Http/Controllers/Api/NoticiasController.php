@@ -16,12 +16,16 @@ class NoticiasController extends Controller
     public function getAll()
     {
         $noticias = DB::table('noticias')->orderByDesc("created_at")->get();
+        foreach ($noticias as $noticia) {
+            $noticia->image = config("app.url").":8000/storage/noticias/".$noticia->image;
+        }
         return response()->json($noticias);
     }
 
     public function getById($id)
     {
         $noticia = DB::table('noticias')->where('id', $id)->first();
+        $noticia->image = config("app.url").":8000/storage/noticias/".$noticia->image;
         return response()->json($noticia);
     }
     public function show($id){
@@ -38,7 +42,7 @@ class NoticiasController extends Controller
             $extension = $request->image->extension();
             $name = uniqid(date('his'));
             $nameFile = "{$name}.{$extension}";
-            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"), 70);
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"));
 
             $data['image'] = $nameFile;
         }
@@ -63,6 +67,17 @@ class NoticiasController extends Controller
 
     public function update(NoticiasRequest $request){
         $data = $request->all();
+        
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $extension = $request->image->extension();
+            $name = uniqid(date('his'));
+            $nameFile = "{$name}.{$extension}";
+            
+            $upload = Image::make($data['image'])->save(storage_path("app/public/noticias/{$nameFile}"));
+
+            $data['image'] = $nameFile;
+        }
+
         Noticia::findOrFail($request->id)->update($data);
         $suportes = Suporte::all();
         $noticias = Noticia::all();
