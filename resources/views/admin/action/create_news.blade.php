@@ -14,7 +14,7 @@
 
       function putDescriptionOnHiddenInput() {
         let inputHidden = document.querySelector("input[name='description']")
-        inputHidden.value = tinymce.activeEditor.getContent({format: 'text'});
+        inputHidden.value = tinymce.activeEditor.getContent();
       }
 
     </script>
