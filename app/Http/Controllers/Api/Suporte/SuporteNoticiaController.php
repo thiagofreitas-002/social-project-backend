@@ -32,7 +32,7 @@ class SuporteNoticiaController extends Controller
     }
     public function store(NoticiasRequest $request)
     {
-        
+        ini_set("memory_limit", "1024M");
         $data = $request->all();
         
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -61,6 +61,7 @@ class SuporteNoticiaController extends Controller
     }
 
     public function update(NoticiasRequest $request){
+        ini_set("memory_limit", "1024M");
         $data = $request->all();
         
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
