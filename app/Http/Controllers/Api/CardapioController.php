@@ -25,7 +25,7 @@ class CardapioController extends Controller
             $todayDate = date('Y/m/d');
             $todayMenu = DB::table('cardapios')->where('date', $todayDate)->first();
             if ($todayMenu == null) {
-                return response()->json(["message" => "Cardápio de hoje não cadastrado"], 502);
+                return response()->json(["message" => "Cardápio de hoje não cadastrado"], 404);
             }
             return response()->json($todayMenu);
         } catch (Exception $e) {
