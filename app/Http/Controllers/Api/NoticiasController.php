@@ -32,7 +32,7 @@ class NoticiasController extends Controller
         }
 
         foreach ($noticias as $noticia) {
-            $noticia->image = config("app.url").":8000/storage/noticias/".$noticia->image;
+            $noticia->image = config("app.url")."/storage/noticias/".$noticia->image;
         }
 
         if (!is_null($page) && !is_null($noticesPerPage)) {
