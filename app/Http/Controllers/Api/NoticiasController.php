@@ -53,7 +53,7 @@ class NoticiasController extends Controller
     public function getById($id)
     {
         $noticia = DB::table('noticias')->where('id', $id)->first();
-        $noticia->image = config("app.url").":8000/storage/noticias/".$noticia->image;
+        $noticia->image = config("app.url")."/storage/noticias/".$noticia->image;
         return response()->json($noticia);
     }
     public function show($id){
